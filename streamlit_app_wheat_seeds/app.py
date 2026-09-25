@@ -12,9 +12,12 @@ Lancer en local :
 import numpy as np
 import joblib
 import streamlit as st
+import os
+
+MODEL_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Charger le modèle sauvegardé
-artefacts = joblib.load("modele_dbscan_wheat.joblib")
+artefacts = joblib.load(os.path.join(MODEL_DIR, "modele_dbscan_wheat.joblib"))
 points_coeur = artefacts["points_coeur"]
 labels_coeur = artefacts["labels_coeur"]
 eps = artefacts["eps"]
@@ -68,3 +71,7 @@ if st.button("Prédire la classe"):
         st.warning("Graine atypique (anomalie) : elle ne ressemble à aucune classe.")
     else:
         st.success("Cette graine appartient à la classe : **" + noms_classes[classe] + "**")
+
+
+
+
